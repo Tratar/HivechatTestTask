@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Bot" representedClassName="Bot" parentEntity="Participant" syncable="YES">
+        <relationship name="chat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chat" inverseName="bot" inverseEntity="Chat" syncable="YES"/>
+    </entity>
+    <entity name="Chat" representedClassName="Chat" syncable="YES">
+        <attribute name="chatID" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="bot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Bot" inverseName="chat" inverseEntity="Bot" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="chat" inverseEntity="Message" syncable="YES"/>
+        <relationship name="persons" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="chats" inverseEntity="Person" syncable="YES"/>
+    </entity>
+    <entity name="Message" representedClassName="Message" syncable="YES">
+        <attribute name="bodyLocation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bodyPicture" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="bodyText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="messageID" attributeType="String" syncable="YES"/>
+        <attribute name="sentOn" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="chat" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chat" inverseName="messages" inverseEntity="Chat" syncable="YES"/>
+        <relationship name="sender" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Participant" inverseName="messages" inverseEntity="Participant" syncable="YES"/>
+    </entity>
+    <entity name="Participant" representedClassName="Participant" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="participantID" attributeType="String" syncable="YES"/>
+        <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="sender" inverseEntity="Message" syncable="YES"/>
+    </entity>
+    <entity name="Person" representedClassName="Person" parentEntity="Participant" syncable="YES">
+        <relationship name="chats" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Chat" inverseName="persons" inverseEntity="Chat" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Bot" positionX="-18" positionY="81" width="128" height="60"/>
+        <element name="Chat" positionX="-36" positionY="27" width="128" height="120"/>
+        <element name="Message" positionX="-63" positionY="-18" width="128" height="150"/>
+        <element name="Participant" positionX="-54" positionY="18" width="128" height="90"/>
+        <element name="Person" positionX="-27" positionY="72" width="128" height="60"/>
+    </elements>
+</model>
